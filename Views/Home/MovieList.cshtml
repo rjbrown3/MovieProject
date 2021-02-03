@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Movie List";
+}
+@model IEnumerable<MovieProject.Models.Movies>
+
+<div>
+    <h1>List of Movies</h1>
+    <table>         <!--table will display list of movies added-->
+        <thead>
+            <tr><td>Category</td><td>Title</td><td>Year</td><td>Director</td><td>Rating</td><td>Edited</td><td>Lent to</td><td>Notes</td></tr>
+        </thead>
+        <tbody>
+            @foreach (MovieProject.Models.Movies movie in Model) //list every movie object in the model
+            {
+            <tr>
+                <td>@movie.Category</td>
+                <td>@movie.Title</td>
+                <td>@movie.Year</td>
+                <td>@movie.Director</td>
+                <td>@movie.Rating</td>
+                <td>@movie.Edited</td>
+                <td>@movie.LentTo</td>
+                <td>@movie.Notes</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

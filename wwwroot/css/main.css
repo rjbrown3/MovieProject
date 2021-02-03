@@ -1,0 +1,29 @@
+﻿body {
+    background-color: #e2e9e4;
+    text-align: center;
+}
+
+label {
+    text-align: end;
+    font-size: 18px;
+    width: 150px;
+    display: inline-block;
+}
+
+a.navbar-brand {
+    color: #0366d6;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+}
+
+thead {
+    font-weight: bold;
+}

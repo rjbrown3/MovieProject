@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Add a New Movie";
+}
+@model MovieProject.Models.Movies
+
+<div>
+    <h1>Add a New Movie to the List</h1>
+    <br />
+
+    <form method="post" asp-action="AddMovies">
+        <div>
+            <label asp-for="Category">Category:</label>
+            <input asp-for="Category" />
+        </div>
+        <div>
+            <label asp-for="Title">Title:</label>
+            <input asp-for="Title" />
+        </div>
+        <div>
+            <label asp-for="Year">Year:</label>
+            <input asp-for="Year" />
+        </div>
+        <div>
+            <label asp-for="Director">Director:</label>
+            <input asp-for="Director" />
+        </div>
+        <div>
+            <label asp-for="Rating">Rating:</label>
+            <select asp-for="Rating">
+                <option value="">Select one</option>
+                <option value="g">G</option>
+                <option value="pg">PG</option>
+                <option value="pg13">PG-13</option>
+                <option value="r">R</option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="Edited">Edited:</label>
+            <select asp-for="Edited">
+                <option value="">Select one</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="LentTo">Lent to:</label>
+            <input asp-for="LentTo" />
+        </div>
+        <div>
+            <label asp-for="Notes">Notes:</label>
+            <textarea asp-for="Notes" rows="5"></textarea>
+        </div>
+        <button type="submit">Add Movie</button>
+        <br />
+        <div asp-validation-summary="All"></div> <!--display validation errors here-->
+    </form>
+</div>
