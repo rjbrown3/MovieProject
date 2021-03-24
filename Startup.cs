@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MovieProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +20,24 @@ namespace MovieProject
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<MovieDbContext>(options =>
+           {
+               options.UseSqlite(Configuration["ConnectionStrings:MovieConnection"]);
+           });
+
+            services.AddScoped<IMovieRepository, EFMovieRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +58,8 @@ namespace MovieProject
 
             app.UseRouting();
 
+            app.UseSession();   //sets up a session for the user & allows them to retain the items in the cart
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -51,7 +67,11 @@ namespace MovieProject
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }

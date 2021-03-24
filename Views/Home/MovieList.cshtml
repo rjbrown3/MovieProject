@@ -1,30 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewBag.Title = "Movie List";
-}
-@model IEnumerable<MovieProject.Models.Movies>
+﻿@model IQueryable<Movies>
 
 <div>
     <h1>List of Movies</h1>
-    <table>         <!--table will display list of movies added-->
+    <table class="table table-bordered table-striped">         <!--table will display list of movies added-->
         <thead>
-            <tr><td>Category</td><td>Title</td><td>Year</td><td>Director</td><td>Rating</td><td>Edited</td><td>Lent to</td><td>Notes</td></tr>
+            <tr><td>Category</td><td>Title</td><td>Year</td><td>Director</td><td>Rating</td><td>Edited</td><td>Lent to</td><td>Notes</td><td>Remove from list</td><td>Edit movie</td></tr>
         </thead>
         <tbody>
-            @foreach (MovieProject.Models.Movies movie in Model) //list every movie object in the model
+            @foreach (var movie in Model) //list every movie object in the model
             {
-            <tr>
-                <td>@movie.Category</td>
-                <td>@movie.Title</td>
-                <td>@movie.Year</td>
-                <td>@movie.Director</td>
-                <td>@movie.Rating</td>
-                <td>@movie.Edited</td>
-                <td>@movie.LentTo</td>
-                <td>@movie.Notes</td>
-            </tr>
+                <tr>
+                    <td>@movie.Category</td>
+                    <td>@movie.Title</td>
+                    <td>@movie.Year</td>
+                    <td>@movie.Director</td>
+                    <td>@movie.Rating.ToUpper()</td>
+                    <td>@movie.Edited</td>
+                    <td>@movie.LentTo</td>
+                    <td>@movie.Notes</td>
+                    <td>
+                        <form asp-action="MovieList" method="post">    <!--Remove movie-->
+                            <input type="hidden" name="MovieId" />     <!--Hidden input gets the movie id and takes it to the controller-->
+                                   value="@movie.MovieId" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="EditMovie" method="get">      <!--Edit movie-->
+                            <input type="hidden" name="MovieId"
+                                   value="@movie.MovieId" />
+
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                Edit
+                            </button>
+                        </form>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

@@ -1,0 +1,66 @@
+﻿<!--Allow user to edit movie info. Original values are in the inputs-->
+
+@model IQueryable<Movies>
+
+<div>
+    <h1 class="text-center">Edit Movie</h1>
+
+    <div class="container col-4">
+
+        <form asp-action="EditMovie" method="post">
+            @foreach (var m in Model)
+            {
+                <div class="form-group">
+                    <label>Category:</label><br>
+                    <input type="text" id="category" name="category" value=@m.Category>
+                </div>
+                <div class="form-group">
+                    <label>Title:</label><br>
+                    <input type="text" id="title" name="title" value=@m.Title>
+                </div>
+                <div class="form-group">
+                    <label>Year:</label><br>
+                    <input type="text" id="year" name="year" value=@m.Year>
+                </div>
+                <div class="form-group">
+                    <label>Director:</label><br>
+                    <input type="text" id="director" name="director" value=@m.Director>
+                </div>
+                <div class="form-group">
+                    <label>Rating:</label><br>
+                    <select id="rating" name="rating">
+                        <option value="@m.Rating">@m.Rating</option>
+                        <option value="g">G</option>
+                        <option value="pg">PG</option>
+                        <option value="pg13">PG-13</option>
+                        <option value="r">R</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Edited:</label><br>
+                    <select id="edited" name="edited">
+                        <option value="@m.Edited">@m.Edited</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lent to:</label><br>
+                    <input type="text" id="lentTo" name="lentTo" value=@m.LentTo>
+                </div>
+                <div class="form-group">
+                    <label>Notes:</label><br>
+                     <textarea id="notes"name="notes" rows="5">@m.Notes</textarea>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="MovieId" value="@m.MovieId" />
+
+                    <button type="submit" class="btn btn-sm btn-success">
+                        Save Changes
+                    </button>
+                </div>
+            }
+        </form>
+    </div>
+
+</div>

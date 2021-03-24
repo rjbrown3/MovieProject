@@ -8,13 +8,15 @@ namespace MovieProject.Models
 {
     public class Movies
     {
+        [Key]
+        public int MovieId { get; set; }    //primary key
         [Required]
         [RegularExpression(@"[^\s]+")]      //ensure user doesn't leave whitespace
         public string Category { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
-        [Range(1900,2100, ErrorMessage = "Please enter a valid year")]
+        [Range(1900, 2100, ErrorMessage = "Please enter a valid year")]
         public int Year { get; set; }
         [Required]
         public string Director { get; set; }

@@ -1,22 +1,31 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@ViewBag.Title</title>
-    <link href="~/css/main.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Joel Hilton Movie Collection</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <menu>
-        <a class="navbar-brand" asp-action="Index">Home</a>
-        <a class="navbar-brand" asp-action="MyPodcasts">Podcasts</a>
-        <a class="navbar-brand" asp-action="AddMovies">Add Movies</a>
-        <a class="navbar-brand" asp-action="MovieList">Movie List</a>
-    </menu>
+    <div class="col navbar-brand bg-dark">
+        <div class="col-4 text-right">
+            <menu>
+                <a class="navbar-brand text-white" asp-action="Index">Home</a>
+                <a class="navbar-brand text-white" asp-action="MyPodcasts">Podcasts</a>
+                <a class="navbar-brand text-white" asp-action="AddMovies">Add Movies</a>
+                <a class="navbar-brand text-white" asp-action="MovieList">Movie List</a>
+            </menu>
+        </div>
+    </div>
+    <br />
+    <br />
 
     @RenderBody()
 
     <br />
     <br />
-    <footer>Rheanna Brown, section 4</footer>
+    <footer class="text-center">Rheanna Brown, section 4</footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
