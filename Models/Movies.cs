@@ -8,6 +8,9 @@ namespace MovieProject.Models
 {
     public class Movies
     {
+        [Key]
+        [Required]
+        public int MovieId { get; set; }
         [Required]
         [RegularExpression(@"[^\s]+")]      //ensure user doesn't leave whitespace
         public string Category { get; set; }

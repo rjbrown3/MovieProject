@@ -11,11 +11,11 @@ namespace MovieProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private MovieContext _context { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieContext con)
         {
-            _logger = logger;
+            _context = con;
         }
 
         public IActionResult Index()
@@ -38,9 +38,12 @@ namespace MovieProject.Controllers
         public IActionResult AddMovies(Movies newMovie)
         {
             //Debug.WriteLine("Rating: " + newMovie.Rating);
-            MovieTempStorage.AddMovie(newMovie);
+
+
             if (ModelState.IsValid)                 //if the model is valid (required fields not null) display the confirmation page
             {
+                _context.Add(newMovie);
+                _context.SaveChanges();
                 return View("Confirmation", newMovie);
             }
             else
@@ -52,7 +55,7 @@ namespace MovieProject.Controllers
 
         public ViewResult MovieList()
         {
-            return View(MovieTempStorage.Movies.Where(Movies => Movies.Title != "Independence Day")); //Displays all movies except for "Independence Day"
+            return View(_context.movies.Where(Movies => Movies.Title != "Independence Day")); //Displays all movies except for "Independence Day"
         }
 
         public IActionResult Privacy()
